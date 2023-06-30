@@ -110,7 +110,11 @@ git init                                                <-- project's folder
 git remote add origin git@gitlab.com:gyurci08/PenetrationTools.git
 git remote -v
 git pull <REMOTE> <name-of-branch>
-git push <remote> <name-of-branch>
+git push <remote> PenetrationTools
+git push --set-upstream git@gitlab.com:gyurci08/PenetrationTools.git master
+
+
+ssh-keygen -t ed25519 -C "haver1036@gmail.com"
 
 REMOTE-CONNECTION
 ===============================================================================================================================================
